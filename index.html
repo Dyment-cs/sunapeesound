@@ -388,6 +388,10 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+            #signup > div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+            }
         }
     </style>
 </head>
@@ -403,6 +407,7 @@
         <ul>
             <li><a href="#mission">Mission</a></li>
             <li><a href="#happening-now" style="background: rgba(212, 175, 55, 0.2); font-weight: bold;">🎤 Happening Now</a></li>
+            <li><a href="#signup" style="background: rgba(212, 175, 55, 0.3); font-weight: bold;">📝 Sign Up</a></li>
             <li><a href="#phases">Phases</a></li>
             <li><a href="#coordination">Coordination</a></li>
             <li><a href="#philanthropy">Giving Back</a></li>
@@ -442,6 +447,181 @@
                 <div style="text-align: center; margin-top: 30px;">
                     <p style="font-size: 1.2em; color: #6B1C23; font-weight: bold;">✨ Be part of the spark that lights up Sunapee Harbor ✨</p>
                 </div>
+            </div>
+        </section>
+
+        <section id="signup" style="margin-top: 60px;">
+            <h2>🎸 Sign Up to Perform</h2>
+            
+            <!-- Signup Status Alert -->
+            <div id="signup-status" style="max-width: 900px; margin: 0 auto 30px; padding: 20px; border-radius: 10px; text-align: center; font-size: 1.2em;"></div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 1200px; margin: 0 auto;">
+                
+                <!-- Left Column: Signup Form -->
+                <div id="signup-form-container" style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                    <h3 style="color: #6B1C23; margin-bottom: 20px;">Reserve Your Slot</h3>
+                    <p style="margin-bottom: 20px; color: #666;">Each performer gets a 15-minute slot. Sign up is available Wednesday through Friday for the upcoming Friday's open mic.</p>
+                    
+                    <form id="performer-signup" style="display: flex; flex-direction: column; gap: 15px;">
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Your Name *</label>
+                            <input type="text" id="performer-name" required style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 1em;">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Email *</label>
+                            <input type="email" id="performer-email" required style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 1em;">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Phone Number</label>
+                            <input type="tel" id="performer-phone" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 1em;">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Preferred Time Slot *</label>
+                            <select id="time-slot" required style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 1em;">
+                                <option value="">-- Select a time slot --</option>
+                                <option value="6:00 PM">6:00 PM - 6:15 PM</option>
+                                <option value="6:15 PM">6:15 PM - 6:30 PM</option>
+                                <option value="6:30 PM">6:30 PM - 6:45 PM</option>
+                                <option value="6:45 PM">6:45 PM - 7:00 PM</option>
+                                <option value="7:00 PM">7:00 PM - 7:15 PM</option>
+                                <option value="7:15 PM">7:15 PM - 7:30 PM</option>
+                                <option value="7:30 PM">7:30 PM - 7:45 PM</option>
+                                <option value="7:45 PM">7:45 PM - 8:00 PM</option>
+                                <option value="8:00 PM">8:00 PM - 8:15 PM</option>
+                                <option value="8:15 PM">8:15 PM - 8:30 PM</option>
+                                <option value="8:30 PM">8:30 PM - 8:45 PM</option>
+                                <option value="8:45 PM">8:45 PM - 9:00 PM</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">What will you perform?</label>
+                            <textarea id="performance-details" rows="3" placeholder="Song titles, instruments, etc." style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 1em; font-family: inherit;"></textarea>
+                        </div>
+                        
+                        <div style="background: #faf8f5; padding: 15px; border-radius: 5px; border-left: 3px solid #D4AF37;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="reserve-list" style="margin-right: 10px; width: 18px; height: 18px;">
+                                <span><strong>Add me to the reserve list</strong> (if my preferred slot is taken, I'm willing to perform if a slot opens up)</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" style="background: linear-gradient(135deg, #D4AF37, #E5C158); color: #1a1a1a; padding: 15px; border: none; border-radius: 5px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: transform 0.3s;">
+                            Sign Up to Perform
+                        </button>
+                    </form>
+
+                    <div id="form-message" style="margin-top: 20px; padding: 15px; border-radius: 5px; display: none;"></div>
+                </div>
+
+                <!-- Right Column: Current Schedule -->
+                <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                    <h3 style="color: #6B1C23; margin-bottom: 20px;">This Week's Lineup</h3>
+                    <p style="margin-bottom: 20px; color: #666;"><strong>Friday, November 8th, 2025</strong> @ Hoptimystic's Tasting Room</p>
+                    
+                    <div id="schedule-display" style="font-size: 1em;">
+                        <!-- Schedule will be populated here -->
+                        <div style="background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #ccc;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: #6B1C23;">6:00 PM - 6:15 PM</span>
+                                <span style="color: #27ae60;">✓ AVAILABLE</span>
+                            </div>
+                        </div>
+                        <div style="background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #ccc;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: #6B1C23;">6:15 PM - 6:30 PM</span>
+                                <span style="color: #27ae60;">✓ AVAILABLE</span>
+                            </div>
+                        </div>
+                        <div style="background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #ccc;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: #6B1C23;">6:30 PM - 6:45 PM</span>
+                                <span style="color: #27ae60;">✓ AVAILABLE</span>
+                            </div>
+                        </div>
+                        <div style="background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #ccc;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: #6B1C23;">6:45 PM - 7:00 PM</span>
+                                <span style="color: #27ae60;">✓ AVAILABLE</span>
+                            </div>
+                        </div>
+                        <div style="background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #ccc;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: #6B1C23;">7:00 PM - 7:15 PM</span>
+                                <span style="color: #27ae60;">✓ AVAILABLE</span>
+                            </div>
+                        </div>
+                        <div style="background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #ccc;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: #6B1C23;">7:15 PM - 7:30 PM</span>
+                                <span style="color: #27ae60;">✓ AVAILABLE</span>
+                            </div>
+                        </div>
+                        <div style="background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #ccc;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: #6B1C23;">7:30 PM - 7:45 PM</span>
+                                <span style="color: #27ae60;">✓ AVAILABLE</span>
+                            </div>
+                        </div>
+                        <div style="background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #ccc;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: #6B1C23;">7:45 PM - 8:00 PM</span>
+                                <span style="color: #27ae60;">✓ AVAILABLE</span>
+                            </div>
+                        </div>
+                        <div style="background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #ccc;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: #6B1C23;">8:00 PM - 8:15 PM</span>
+                                <span style="color: #27ae60;">✓ AVAILABLE</span>
+                            </div>
+                        </div>
+                        <div style="background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #ccc;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: #6B1C23;">8:15 PM - 8:30 PM</span>
+                                <span style="color: #27ae60;">✓ AVAILABLE</span>
+                            </div>
+                        </div>
+                        <div style="background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #ccc;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: #6B1C23;">8:30 PM - 8:45 PM</span>
+                                <span style="color: #27ae60;">✓ AVAILABLE</span>
+                            </div>
+                        </div>
+                        <div style="background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #ccc;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: #6B1C23;">8:45 PM - 9:00 PM</span>
+                                <span style="color: #27ae60;">✓ AVAILABLE</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="reserve-list-display" style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee;">
+                        <h4 style="color: #6B1C23; margin-bottom: 15px;">📋 Reserve List</h4>
+                        <p style="color: #666; font-style: italic;">No one on the reserve list yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter Signup -->
+            <div style="background: linear-gradient(135deg, #6B1C23, #8B2530); padding: 40px; border-radius: 10px; margin-top: 60px; color: #F5E6D3; box-shadow: 0 5px 20px rgba(107, 28, 35, 0.3);">
+                <h3 style="text-align: center; color: #D4AF37; margin-bottom: 20px; font-size: 2em;">Stay in the Loop</h3>
+                <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px;">Get weekly updates about upcoming events, performer lineups, and Sunapee Sound Project news</p>
+                
+                <form id="newsletter-signup" style="max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px;">
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <input type="text" id="newsletter-name" placeholder="Your Name" required style="flex: 1; min-width: 200px; padding: 15px; border: none; border-radius: 5px; font-size: 1em;">
+                        <input type="email" id="newsletter-email" placeholder="Your Email" required style="flex: 1; min-width: 200px; padding: 15px; border: none; border-radius: 5px; font-size: 1em;">
+                    </div>
+                    <button type="submit" style="background: linear-gradient(135deg, #D4AF37, #E5C158); color: #1a1a1a; padding: 15px 40px; border: none; border-radius: 5px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: transform 0.3s;">
+                        Subscribe to Newsletter
+                    </button>
+                </form>
+                
+                <div id="newsletter-message" style="margin-top: 20px; padding: 15px; border-radius: 5px; display: none; text-align: center;"></div>
             </div>
         </section>
 
@@ -697,6 +877,209 @@
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
         });
+
+        // Signup availability checker
+        function checkSignupAvailability() {
+            const now = new Date();
+            const dayOfWeek = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 5 = Friday
+            
+            const statusDiv = document.getElementById('signup-status');
+            const formContainer = document.getElementById('signup-form-container');
+            const form = document.getElementById('performer-signup');
+            
+            // Wednesday (3), Thursday (4), Friday (5) - signups are open
+            if (dayOfWeek >= 3 && dayOfWeek <= 5) {
+                statusDiv.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                statusDiv.style.color = 'white';
+                statusDiv.innerHTML = '✅ <strong>Sign-ups are OPEN!</strong> Reserve your slot for this Friday\'s open mic.';
+                form.style.display = 'flex';
+            } else {
+                // Saturday (6), Sunday (0), Monday (1), Tuesday (2) - signups are closed
+                statusDiv.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+                statusDiv.style.color = 'white';
+                
+                let daysUntilOpen;
+                if (dayOfWeek === 6) daysUntilOpen = 4; // Saturday
+                else if (dayOfWeek === 0) daysUntilOpen = 3; // Sunday
+                else if (dayOfWeek === 1) daysUntilOpen = 2; // Monday
+                else if (dayOfWeek === 2) daysUntilOpen = 1; // Tuesday
+                
+                statusDiv.innerHTML = `🔒 <strong>Sign-ups are currently closed.</strong> Check back on Wednesday! (${daysUntilOpen} day${daysUntilOpen > 1 ? 's' : ''} to go)`;
+                form.style.display = 'none';
+            }
+        }
+
+        // Initialize signup data in localStorage if not exists
+        if (!localStorage.getItem('openMicSignups')) {
+            localStorage.setItem('openMicSignups', JSON.stringify([]));
+        }
+        if (!localStorage.getItem('reserveList')) {
+            localStorage.setItem('reserveList', JSON.stringify([]));
+        }
+
+        // Load and display current signups
+        function updateScheduleDisplay() {
+            const signups = JSON.parse(localStorage.getItem('openMicSignups') || '[]');
+            const reserveList = JSON.parse(localStorage.getItem('reserveList') || '[]');
+            
+            const timeSlots = [
+                '6:00 PM', '6:15 PM', '6:30 PM', '6:45 PM',
+                '7:00 PM', '7:15 PM', '7:30 PM', '7:45 PM',
+                '8:00 PM', '8:15 PM', '8:30 PM', '8:45 PM'
+            ];
+            
+            const scheduleDiv = document.getElementById('schedule-display');
+            scheduleDiv.innerHTML = '';
+            
+            timeSlots.forEach(slot => {
+                const signup = signups.find(s => s.timeSlot === slot);
+                const nextSlot = timeSlots[timeSlots.indexOf(slot) + 1] || '9:00 PM';
+                
+                const slotDiv = document.createElement('div');
+                slotDiv.style.cssText = 'background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid ' + (signup ? '#D4AF37' : '#ccc');
+                
+                if (signup) {
+                    slotDiv.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <div style="font-weight: bold; color: #6B1C23; margin-bottom: 5px;">${slot} - ${nextSlot}</div>
+                                <div style="font-size: 1.1em; color: #333; margin-bottom: 3px;"><strong>${signup.name}</strong></div>
+                                ${signup.details ? `<div style="font-size: 0.9em; color: #666; font-style: italic;">${signup.details}</div>` : ''}
+                            </div>
+                            <span style="color: #e74c3c; font-weight: bold;">● BOOKED</span>
+                        </div>
+                    `;
+                } else {
+                    slotDiv.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: bold; color: #6B1C23;">${slot} - ${nextSlot}</span>
+                            <span style="color: #27ae60; font-weight: bold;">✓ AVAILABLE</span>
+                        </div>
+                    `;
+                }
+                
+                scheduleDiv.appendChild(slotDiv);
+            });
+            
+            // Update reserve list display
+            const reserveDiv = document.getElementById('reserve-list-display');
+            if (reserveList.length > 0) {
+                reserveDiv.innerHTML = `
+                    <h4 style="color: #6B1C23; margin-bottom: 15px;">📋 Reserve List</h4>
+                    ${reserveList.map((person, index) => `
+                        <div style="background: #faf8f5; padding: 10px 15px; border-radius: 5px; margin-bottom: 8px; border-left: 3px solid #D4AF37;">
+                            <strong>${index + 1}. ${person.name}</strong>
+                            ${person.details ? `<span style="color: #666; font-size: 0.9em;"> - ${person.details}</span>` : ''}
+                        </div>
+                    `).join('')}
+                `;
+            } else {
+                reserveDiv.innerHTML = `
+                    <h4 style="color: #6B1C23; margin-bottom: 15px;">📋 Reserve List</h4>
+                    <p style="color: #666; font-style: italic;">No one on the reserve list yet</p>
+                `;
+            }
+        }
+
+        // Handle performer signup
+        document.getElementById('performer-signup').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('performer-name').value;
+            const email = document.getElementById('performer-email').value;
+            const phone = document.getElementById('performer-phone').value;
+            const timeSlot = document.getElementById('time-slot').value;
+            const details = document.getElementById('performance-details').value;
+            const isReserve = document.getElementById('reserve-list').checked;
+            
+            const signups = JSON.parse(localStorage.getItem('openMicSignups') || '[]');
+            const reserveList = JSON.parse(localStorage.getItem('reserveList') || '[]');
+            
+            const messageDiv = document.getElementById('form-message');
+            
+            // Check if slot is already taken
+            const slotTaken = signups.find(s => s.timeSlot === timeSlot);
+            
+            if (slotTaken && !isReserve) {
+                messageDiv.style.display = 'block';
+                messageDiv.style.background = '#fff3cd';
+                messageDiv.style.color = '#856404';
+                messageDiv.style.border = '1px solid #ffeaa7';
+                messageDiv.innerHTML = `⚠️ That time slot is already booked by ${slotTaken.name}. Please choose another slot or add yourself to the reserve list.`;
+                return;
+            }
+            
+            if (isReserve || slotTaken) {
+                // Add to reserve list
+                reserveList.push({ name, email, phone, details, preferredSlot: timeSlot });
+                localStorage.setItem('reserveList', JSON.stringify(reserveList));
+                
+                messageDiv.style.display = 'block';
+                messageDiv.style.background = '#d4edda';
+                messageDiv.style.color = '#155724';
+                messageDiv.style.border = '1px solid #c3e6cb';
+                messageDiv.innerHTML = `✅ Thanks ${name}! You've been added to the reserve list. We'll contact you at ${email} if a slot opens up.`;
+            } else {
+                // Add to regular signup
+                signups.push({ name, email, phone, timeSlot, details });
+                localStorage.setItem('openMicSignups', JSON.stringify(signups));
+                
+                messageDiv.style.display = 'block';
+                messageDiv.style.background = '#d4edda';
+                messageDiv.style.color = '#155724';
+                messageDiv.style.border = '1px solid #c3e6cb';
+                messageDiv.innerHTML = `🎉 You're all set, ${name}! Your slot at ${timeSlot} is confirmed. See you Friday!`;
+            }
+            
+            // Reset form
+            this.reset();
+            
+            // Update display
+            updateScheduleDisplay();
+            
+            // Scroll to message
+            messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Hide message after 10 seconds
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 10000);
+        });
+
+        // Handle newsletter signup
+        document.getElementById('newsletter-signup').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('newsletter-name').value;
+            const email = document.getElementById('newsletter-email').value;
+            
+            const messageDiv = document.getElementById('newsletter-message');
+            
+            // Store newsletter signups
+            const newsletters = JSON.parse(localStorage.getItem('newsletterSignups') || '[]');
+            newsletters.push({ name, email, date: new Date().toISOString() });
+            localStorage.setItem('newsletterSignups', JSON.stringify(newsletters));
+            
+            messageDiv.style.display = 'block';
+            messageDiv.style.background = '#D4AF37';
+            messageDiv.style.color = '#1a1a1a';
+            messageDiv.innerHTML = `🎉 Welcome to the community, ${name}! Check your email (${email}) for confirmation.`;
+            
+            // Reset form
+            this.reset();
+            
+            // Hide message after 8 seconds
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 8000);
+        });
+
+        // Initialize on page load
+        checkSignupAvailability();
+        updateScheduleDisplay();
+        
+        // Check every hour if signup availability has changed
+        setInterval(checkSignupAvailability, 3600000);
     </script>
 </body>
 </html>
