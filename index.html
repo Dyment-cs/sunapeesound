@@ -100,6 +100,15 @@
             }
         }
 
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 10px rgba(107, 28, 35, 0.3);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(212, 175, 55, 0.6);
+            }
+        }
+
         nav {
             background: #6B1C23;
             padding: 15px 0;
@@ -393,6 +402,7 @@
     <nav>
         <ul>
             <li><a href="#mission">Mission</a></li>
+            <li><a href="#happening-now" style="background: rgba(212, 175, 55, 0.2); font-weight: bold;">🎤 Happening Now</a></li>
             <li><a href="#phases">Phases</a></li>
             <li><a href="#coordination">Coordination</a></li>
             <li><a href="#philanthropy">Giving Back</a></li>
@@ -417,33 +427,54 @@
             </div>
         </section>
 
+        <section id="happening-now" style="background: linear-gradient(135deg, #D4AF37, #E5C158); padding: 60px 20px; margin: 0 -20px; border-radius: 15px; box-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);">
+            <h2 style="color: #1a1a1a; text-shadow: none;">🎤 What's Happening Now</h2>
+            <div style="background: white; padding: 40px; border-radius: 10px; max-width: 900px; margin: 0 auto; box-shadow: 0 5px 20px rgba(0,0,0,0.2);">
+                <h3 style="text-align: center; font-size: 2.2em; margin-bottom: 20px; color: #6B1C23;">FIRST OPEN MIC NIGHT!</h3>
+                <p style="text-align: center; font-size: 1.5em; margin-bottom: 15px; color: #333;"><strong>Thursday, November 7th, 2025</strong></p>
+                <p style="text-align: center; font-size: 1.3em; margin-bottom: 30px; color: #666;">6:00 PM - 9:00 PM @ Hoptimystic's Tasting Room, Sunapee Harbor</p>
+                
+                <div style="background: #faf8f5; padding: 25px; border-radius: 8px; border-left: 4px solid #D4AF37; margin: 20px 0;">
+                    <p style="font-size: 1.15em; line-height: 1.8; margin-bottom: 15px;">This is where it all begins! After a hugely successful Halloween event, we're kicking off regular weekly programming. Come celebrate the launch of the Sunapee Sound Project — bring your voice, your instrument, or just your energy.</p>
+                    <p style="font-size: 1.15em; line-height: 1.8;"><strong>Every Friday going forward:</strong> Open Mic & Karaoke, 6-9 PM. This is just the start of something bigger.</p>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <p style="font-size: 1.2em; color: #6B1C23; font-weight: bold;">✨ Be part of the spark that lights up Sunapee Harbor ✨</p>
+                </div>
+            </div>
+        </section>
+
         <section id="phases">
             <h2>Strategic Phases</h2>
             
             <div class="phases">
-                <div class="phase">
-                    <div class="phase-number">0</div>
-                    <h3>The Foundation (Spring 2025)</h3>
-                    <p><strong>Goal:</strong> Prepare the land and activate community engagement.</p>
+                <div class="phase" style="border-left: 5px solid #2ecc71;">
+                    <div class="phase-number" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">✓</div>
+                    <h3>The Foundation — COMPLETE (Fall 2025)</h3>
+                    <p><strong>Goal:</strong> Prepare the gear and activate community engagement.</p>
                     <ul>
-                        <li>Level the riverway land for dancing and safe gatherings</li>
-                        <li>Ensure grading and drainage comply with minimal-impact landscaping standards</li>
-                        <li>Launch <em>Community Work Day</em> — volunteers join to help prepare the site</li>
-                        <li>Gather donations (gravel, equipment, labor)</li>
+                        <li>✅ Acquired professional PA system</li>
+                        <li>✅ Successfully tested at Halloween event — huge community turnout!</li>
+                        <li>✅ Built relationships with Hoptimystic Brewing, Fenton's Landing, and local partners</li>
+                        <li>✅ Secured domain: sunapeesound.org</li>
+                        <li>✅ Community momentum is building</li>
                     </ul>
                 </div>
 
-                <div class="phase">
-                    <div class="phase-number">1</div>
-                    <h3>"The Spark" (Spring–Summer 2025)</h3>
-                    <p><strong>Goal:</strong> Demonstrate the power of collaboration through action.</p>
+                <div class="phase" style="border-left: 5px solid #D4AF37; background: #fffef8;">
+                    <div class="phase-number" style="background: linear-gradient(135deg, #D4AF37, #E5C158); animation: pulse 2s infinite;">1</div>
+                    <h3>"The Spark" — HAPPENING NOW (November 2025 - Spring 2026)</h3>
+                    <p><strong>Goal:</strong> Demonstrate the power of collaboration through consistent events.</p>
                     <ul>
-                        <li>Launch coordinated weekly events at <strong>Hoptimystic Brewing</strong> — Open Mic & Karaoke every Friday</li>
+                        <li><strong>🎤 FIRST OPEN MIC: Thursday, November 7th, 2025 @ Hoptimystic's Tasting Room</strong></li>
+                        <li>Establish weekly Open Mic & Karaoke every Friday 6-9pm</li>
+                        <li>Build momentum through consistent, high-quality events</li>
                         <li>Create a <strong>shared community calendar</strong> so events complement rather than compete</li>
                         <li>Bring together existing venues and organizers under one collaborative umbrella</li>
-                        <li>Promote via posters and local press ("Together, We're Stronger")</li>
-                        <li>Collect attendee signatures, footage, and feedback for town support</li>
+                        <li>Collect attendee signatures, footage, and testimonials for town support</li>
                         <li>Establish donation streams for "Build the Stage Fund"</li>
+                        <li>Promote via posters, social media, and word-of-mouth ("Together, We're Stronger")</li>
                     </ul>
                     <div class="quote">
                         When we stop competing for the same audience and start building together, everyone wins. The momentum is already here — we just need to unite it.
@@ -452,7 +483,7 @@
 
                 <div class="phase">
                     <div class="phase-number">2</div>
-                    <h3>Modular Stage Build (Late 2025)</h3>
+                    <h3>Modular Stage Build (Spring–Summer 2026)</h3>
                     <p><strong>Goal:</strong> Construct a legal, modular, low-impact stage.</p>
                     <ul>
                         <li>Partner with the volunteer architect to design a stage that is:
@@ -464,12 +495,13 @@
                         </li>
                         <li>Install base decking and simple canopy</li>
                         <li>File for <strong>temporary structure permit</strong> (local & state)</li>
+                        <li>Use documented success from Phase 1 events to support permit applications</li>
                     </ul>
                 </div>
 
                 <div class="phase">
                     <div class="phase-number">3</div>
-                    <h3>Full Riverway Venue (2026–2027)</h3>
+                    <h3>Full Riverway Venue (2027–2028)</h3>
                     <p><strong>Goal:</strong> Establish a landmark performance space.</p>
                     <ul>
                         <li>Secure long-term permits and environmental approval</li>
@@ -509,7 +541,7 @@
 
                 <h3 style="margin-top: 30px;">Current Events in the Ecosystem:</h3>
                 <img src="open-mic-poster.png" alt="Open Mic at Hoptimystic" style="max-width: 100%; height: auto; margin-top: 20px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
-                <p style="text-align: center; margin-top: 15px; font-style: italic; color: #666;">Open Mic & Karaoke every Friday 6-9pm at Hoptimystic's Tasting Room — one example of the momentum we're uniting</p>
+                <p style="text-align: center; margin-top: 15px; font-style: italic; color: #666;"><strong>IT'S HAPPENING!</strong> Open Mic & Karaoke kicks off November 7th, then every Friday 6-9pm at Hoptimystic's Tasting Room</p>
             </div>
         </section>
 
