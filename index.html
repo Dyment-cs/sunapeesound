@@ -1597,129 +1597,177 @@
             localStorage.setItem('reserveList', JSON.stringify([]));
         }
 
-        // Load and display current signups
-        function updateScheduleDisplay() {
-            const signups = JSON.parse(localStorage.getItem('openMicSignups') || '[]');
-            const reserveList = JSON.parse(localStorage.getItem('reserveList') || '[]');
-            
+        // Load and display current signups from backend
+        async function updateScheduleDisplay() {
             const timeSlots = [
                 '6:00 PM', '6:15 PM', '6:30 PM', '6:45 PM',
                 '7:00 PM', '7:15 PM', '7:30 PM', '7:45 PM',
                 '8:00 PM', '8:15 PM', '8:30 PM', '8:45 PM'
             ];
-            
+
             const scheduleDiv = document.getElementById('schedule-display');
-            scheduleDiv.innerHTML = '';
-            
-            timeSlots.forEach(slot => {
-                const signup = signups.find(s => s.timeSlot === slot);
-                const nextSlot = timeSlots[timeSlots.indexOf(slot) + 1] || '9:00 PM';
-                
-                const slotDiv = document.createElement('div');
-                slotDiv.style.cssText = 'background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid ' + (signup ? '#D4AF37' : '#ccc');
-                
-                if (signup) {
-                    slotDiv.innerHTML = `
-                        <div style="display: flex; justify-content: space-between; align-items: start;">
-                            <div>
-                                <div style="font-weight: bold; color: #6B1C23; margin-bottom: 5px;">${slot} - ${nextSlot}</div>
-                                <div style="font-size: 1.1em; color: #333; margin-bottom: 3px;"><strong>${signup.name}</strong></div>
-                                ${signup.details ? `<div style="font-size: 0.9em; color: #666; font-style: italic;">${signup.details}</div>` : ''}
+            const reserveDiv = document.getElementById('reserve-list-display');
+
+            // Calculate next Friday's date
+            const getNextFriday = () => {
+                const today = new Date();
+                const dayOfWeek = today.getDay();
+                const daysUntilFriday = (5 - dayOfWeek + 7) % 7 || 7;
+                const nextFriday = new Date(today);
+                nextFriday.setDate(today.getDate() + daysUntilFriday);
+                return nextFriday.toISOString().split('T')[0];
+            };
+
+            const signupDate = getNextFriday();
+            const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? 'http://localhost:3000/api'
+                : 'https://api.sunapeesound.com/api';
+
+            try {
+                // Fetch schedule from backend
+                const response = await fetch(`${API_URL}/openmic/schedule/${signupDate}`);
+                const data = await response.json();
+
+                const signups = data.signups || [];
+                const reserveList = data.reserveList || [];
+
+                // Display schedule
+                scheduleDiv.innerHTML = '';
+
+                timeSlots.forEach(slot => {
+                    const signup = signups.find(s => s.time_slot === slot);
+                    const nextSlot = timeSlots[timeSlots.indexOf(slot) + 1] || '9:00 PM';
+
+                    const slotDiv = document.createElement('div');
+                    slotDiv.style.cssText = 'background: #faf8f5; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid ' + (signup ? '#D4AF37' : '#ccc');
+
+                    if (signup) {
+                        slotDiv.innerHTML = `
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <div>
+                                    <div style="font-weight: bold; color: #6B1C23; margin-bottom: 5px;">${slot} - ${nextSlot}</div>
+                                    <div style="font-size: 1.1em; color: #333; margin-bottom: 3px;"><strong>${signup.performer_name}</strong></div>
+                                    ${signup.performance_details ? `<div style="font-size: 0.9em; color: #666; font-style: italic;">${signup.performance_details}</div>` : ''}
+                                </div>
+                                <span style="color: #e74c3c; font-weight: bold;">● BOOKED</span>
                             </div>
-                            <span style="color: #e74c3c; font-weight: bold;">● BOOKED</span>
-                        </div>
+                        `;
+                    } else {
+                        slotDiv.innerHTML = `
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: #6B1C23;">${slot} - ${nextSlot}</span>
+                                <span style="color: #27ae60; font-weight: bold;">✓ AVAILABLE</span>
+                            </div>
+                        `;
+                    }
+
+                    scheduleDiv.appendChild(slotDiv);
+                });
+
+                // Update reserve list display
+                if (reserveList.length > 0) {
+                    reserveDiv.innerHTML = `
+                        <h4 style="color: #6B1C23; margin-bottom: 15px;">📋 Reserve List</h4>
+                        ${reserveList.map((person, index) => `
+                            <div style="background: #faf8f5; padding: 10px 15px; border-radius: 5px; margin-bottom: 8px; border-left: 3px solid #D4AF37;">
+                                <strong>${index + 1}. ${person.performer_name}</strong>
+                                ${person.performance_details ? `<span style="color: #666; font-size: 0.9em;"> - ${person.performance_details}</span>` : ''}
+                            </div>
+                        `).join('')}
                     `;
                 } else {
-                    slotDiv.innerHTML = `
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-weight: bold; color: #6B1C23;">${slot} - ${nextSlot}</span>
-                            <span style="color: #27ae60; font-weight: bold;">✓ AVAILABLE</span>
-                        </div>
+                    reserveDiv.innerHTML = `
+                        <h4 style="color: #6B1C23; margin-bottom: 15px;">📋 Reserve List</h4>
+                        <p style="color: #666; font-style: italic;">No one on the reserve list yet</p>
                     `;
                 }
-                
-                scheduleDiv.appendChild(slotDiv);
-            });
-            
-            // Update reserve list display
-            const reserveDiv = document.getElementById('reserve-list-display');
-            if (reserveList.length > 0) {
-                reserveDiv.innerHTML = `
-                    <h4 style="color: #6B1C23; margin-bottom: 15px;">📋 Reserve List</h4>
-                    ${reserveList.map((person, index) => `
-                        <div style="background: #faf8f5; padding: 10px 15px; border-radius: 5px; margin-bottom: 8px; border-left: 3px solid #D4AF37;">
-                            <strong>${index + 1}. ${person.name}</strong>
-                            ${person.details ? `<span style="color: #666; font-size: 0.9em;"> - ${person.details}</span>` : ''}
-                        </div>
-                    `).join('')}
-                `;
-            } else {
-                reserveDiv.innerHTML = `
-                    <h4 style="color: #6B1C23; margin-bottom: 15px;">📋 Reserve List</h4>
-                    <p style="color: #666; font-style: italic;">No one on the reserve list yet</p>
-                `;
+            } catch (error) {
+                console.error('Error fetching schedule:', error);
+                // Fall back to showing empty schedule
+                scheduleDiv.innerHTML = '<p style="color: #666;">Unable to load schedule. Please try again later.</p>';
             }
         }
 
         // Handle performer signup
-        document.getElementById('performer-signup').addEventListener('submit', function(e) {
+        document.getElementById('performer-signup').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             const name = document.getElementById('performer-name').value;
             const email = document.getElementById('performer-email').value;
             const phone = document.getElementById('performer-phone').value;
             const timeSlot = document.getElementById('time-slot').value;
             const details = document.getElementById('performance-details').value;
             const isReserve = document.getElementById('reserve-list').checked;
-            
-            const signups = JSON.parse(localStorage.getItem('openMicSignups') || '[]');
-            const reserveList = JSON.parse(localStorage.getItem('reserveList') || '[]');
-            
+
             const messageDiv = document.getElementById('form-message');
-            
-            // Check if slot is already taken
-            const slotTaken = signups.find(s => s.timeSlot === timeSlot);
-            
-            if (slotTaken && !isReserve) {
-                messageDiv.style.display = 'block';
-                messageDiv.style.background = '#fff3cd';
-                messageDiv.style.color = '#856404';
-                messageDiv.style.border = '1px solid #ffeaa7';
-                messageDiv.innerHTML = `⚠️ That time slot is already booked by ${slotTaken.name}. Please choose another slot or add yourself to the reserve list.`;
-                return;
-            }
-            
-            if (isReserve || slotTaken) {
-                // Add to reserve list
-                reserveList.push({ name, email, phone, details, preferredSlot: timeSlot });
-                localStorage.setItem('reserveList', JSON.stringify(reserveList));
-                
+
+            // Calculate next Friday's date
+            const getNextFriday = () => {
+                const today = new Date();
+                const dayOfWeek = today.getDay();
+                const daysUntilFriday = (5 - dayOfWeek + 7) % 7 || 7;
+                const nextFriday = new Date(today);
+                nextFriday.setDate(today.getDate() + daysUntilFriday);
+                return nextFriday.toISOString().split('T')[0];
+            };
+
+            const signupDate = getNextFriday();
+
+            // Send to backend API
+            const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? 'http://localhost:3000/api'
+                : 'https://api.sunapeesound.com/api';  // Update with your production URL
+
+            try {
+                const response = await fetch(`${API_URL}/openmic/signup`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        performerName: name,
+                        email,
+                        phone,
+                        timeSlot,
+                        performanceDetails: details,
+                        isReserve,
+                        signupDate
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Signup failed');
+                }
+
+                // Success
                 messageDiv.style.display = 'block';
                 messageDiv.style.background = '#d4edda';
                 messageDiv.style.color = '#155724';
                 messageDiv.style.border = '1px solid #c3e6cb';
-                messageDiv.innerHTML = `✅ Thanks ${name}! You've been added to the reserve list. We'll contact you at ${email} if a slot opens up.`;
-            } else {
-                // Add to regular signup
-                signups.push({ name, email, phone, timeSlot, details });
-                localStorage.setItem('openMicSignups', JSON.stringify(signups));
-                
+                messageDiv.innerHTML = data.isReserve
+                    ? `✅ Thanks ${name}! You've been added to the reserve list. We'll contact you at ${email} if a slot opens up.`
+                    : `🎉 You're all set, ${name}! Your slot at ${timeSlot} is confirmed. See you Friday!`;
+
+                // Reset form
+                this.reset();
+
+                // Update display
+                updateScheduleDisplay();
+
+            } catch (error) {
+                console.error('Signup error:', error);
                 messageDiv.style.display = 'block';
-                messageDiv.style.background = '#d4edda';
-                messageDiv.style.color = '#155724';
-                messageDiv.style.border = '1px solid #c3e6cb';
-                messageDiv.innerHTML = `🎉 You're all set, ${name}! Your slot at ${timeSlot} is confirmed. See you Friday!`;
+                messageDiv.style.background = '#f8d7da';
+                messageDiv.style.color = '#721c24';
+                messageDiv.style.border = '1px solid #f5c6cb';
+                messageDiv.innerHTML = `❌ ${error.message || 'An error occurred. Please try again or contact us directly.'}`;
             }
-            
-            // Reset form
-            this.reset();
-            
-            // Update display
-            updateScheduleDisplay();
-            
+
             // Scroll to message
             messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            
+
             // Hide message after 10 seconds
             setTimeout(() => {
                 messageDiv.style.display = 'none';
@@ -1727,27 +1775,51 @@
         });
 
         // Handle newsletter signup
-        document.getElementById('newsletter-signup').addEventListener('submit', function(e) {
+        document.getElementById('newsletter-signup').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             const name = document.getElementById('newsletter-name').value;
             const email = document.getElementById('newsletter-email').value;
-            
+
             const messageDiv = document.getElementById('newsletter-message');
-            
-            // Store newsletter signups
-            const newsletters = JSON.parse(localStorage.getItem('newsletterSignups') || '[]');
-            newsletters.push({ name, email, date: new Date().toISOString() });
-            localStorage.setItem('newsletterSignups', JSON.stringify(newsletters));
-            
-            messageDiv.style.display = 'block';
-            messageDiv.style.background = '#D4AF37';
-            messageDiv.style.color = '#1a1a1a';
-            messageDiv.innerHTML = `🎉 Welcome to the community, ${name}! Check your email (${email}) for confirmation.`;
-            
-            // Reset form
-            this.reset();
-            
+
+            // Send to backend API
+            const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? 'http://localhost:3000/api'
+                : 'https://api.sunapeesound.com/api';  // Update with your production URL
+
+            try {
+                const response = await fetch(`${API_URL}/newsletter/signup`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, email })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Signup failed');
+                }
+
+                // Success
+                messageDiv.style.display = 'block';
+                messageDiv.style.background = '#D4AF37';
+                messageDiv.style.color = '#1a1a1a';
+                messageDiv.innerHTML = `🎉 Welcome to the community, ${name}! Check your email (${email}) for confirmation.`;
+
+                // Reset form
+                this.reset();
+
+            } catch (error) {
+                console.error('Newsletter signup error:', error);
+                messageDiv.style.display = 'block';
+                messageDiv.style.background = '#f8d7da';
+                messageDiv.style.color = '#721c24';
+                messageDiv.innerHTML = `❌ ${error.message || 'An error occurred. Please try again.'}`;
+            }
+
             // Hide message after 8 seconds
             setTimeout(() => {
                 messageDiv.style.display = 'none';
