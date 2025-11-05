@@ -225,6 +225,88 @@
             margin: 30px 0;
         }
 
+        /* Community Events Section */
+        .event-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-left: 5px solid #D4AF37;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .event-date {
+            background: linear-gradient(135deg, #6B1C23, #8B2530);
+            color: #D4AF37;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+        .event-title {
+            font-size: 1.5em;
+            color: #6B1C23;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .event-venue {
+            color: #666;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .event-description {
+            color: #333;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .event-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #D4AF37, #E5C158);
+            color: #1a1a1a;
+            padding: 8px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .event-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .event-source {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .no-events {
+            text-align: center;
+            padding: 40px;
+            background: #faf8f5;
+            border-radius: 10px;
+            color: #666;
+        }
+
         .phases {
             display: grid;
             gap: 30px;
@@ -416,6 +498,30 @@
             box-shadow: 0 15px 35px rgba(212, 175, 55, 0.6);
         }
 
+        .filter-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .filter-tag {
+            padding: 8px 20px;
+            background: #faf8f5;
+            border: 2px solid #D4AF37;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .filter-tag:hover, .filter-tag.active {
+            background: linear-gradient(135deg, #D4AF37, #E5C158);
+            color: #1a1a1a;
+            font-weight: bold;
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2em;
@@ -482,6 +588,7 @@
         <button class="mobile-menu-toggle" onclick="toggleMenu()">☰ Menu</button>
         <ul id="nav-menu">
             <li><a href="#mission" onclick="closeMenu()">Mission</a></li>
+            <li><a href="#community-events" style="background: rgba(212, 175, 55, 0.25); font-weight: bold;" onclick="closeMenu()">🎵 Community Events</a></li>
             <li><a href="#happening-now" style="background: rgba(212, 175, 55, 0.2); font-weight: bold;" onclick="closeMenu()">🎤 Happening Now</a></li>
             <li><a href="#regional-impact" onclick="closeMenu()">🌍 Regional Impact</a></li>
             <li><a href="#signup" style="background: rgba(212, 175, 55, 0.3); font-weight: bold;" onclick="closeMenu()">📝 Sign Up</a></li>
@@ -505,6 +612,47 @@
 
                 <h3 style="margin-top: 30px;">Core Vision:</h3>
                 <p>A permanent lakeside performance space that doubles as a <strong>philanthropic engine</strong> — where coordinated events generate community reinvestment through music, culinary art, and local creativity. One calendar. One community. Unlimited possibilities.</p>
+            </div>
+        </section>
+
+        <!-- NEW: Community Events Calendar Section -->
+        <section id="community-events" style="background: linear-gradient(135deg, #2d2d2d, #1a1a1a); padding: 60px 20px; margin: 0 -20px; color: #F5E6D3; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.05; background-image: radial-gradient(circle, #D4AF37 1px, transparent 1px); background-size: 30px 30px;"></div>
+            
+            <h2 style="color: #D4AF37; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 1;">🎵 Music Around the Harbor</h2>
+            
+            <div style="max-width: 1000px; margin: 0 auto; position: relative; z-index: 1;">
+                <div style="background: rgba(107, 28, 35, 0.4); backdrop-filter: blur(10px); padding: 30px; border-radius: 15px; border: 2px solid #D4AF37; box-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 40px; text-align: center;">
+                    <p style="font-size: 1.2em; line-height: 1.8;">Discover all the music happening across Sunapee! This calendar brings together events from <strong>Project Sunapee</strong>, our weekly <strong>Open Mic nights</strong>, and all the amazing performances throughout our community.</p>
+                    <p style="font-size: 1em; margin-top: 15px; opacity: 0.9;">📅 One calendar. Multiple venues. Unlimited music.</p>
+                </div>
+
+                <!-- Filter Tags -->
+                <div class="filter-tags" id="event-filters" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+                    <div class="filter-tag active" data-filter="all">🎵 All Events</div>
+                    <div class="filter-tag" data-filter="music">🎸 Live Music</div>
+                    <div class="filter-tag" data-filter="concert">🎤 Concerts</div>
+                    <div class="filter-tag" data-filter="coffeehouse">☕ Coffeehouse</div>
+                    <div class="filter-tag" data-filter="harbor">⚓ Harbor Events</div>
+                </div>
+
+                <!-- Events Container -->
+                <div id="events-container" style="background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 10px;">
+                    <div class="loading-spinner">
+                        <p style="font-size: 1.2em; color: #6B1C23;">🎵 Loading upcoming music events...</p>
+                    </div>
+                </div>
+
+                <!-- Attribution -->
+                <div style="text-align: center; margin-top: 30px; padding: 20px; background: rgba(212, 175, 55, 0.1); border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.3);">
+                    <p style="color: #D4AF37; font-size: 0.95em;">
+                        📅 Events powered by <a href="https://projectsunapee.org/community-events/" target="_blank" style="color: #E5C158; text-decoration: none; font-weight: bold;">Project Sunapee</a> 
+                        • Visit their full calendar for all community happenings
+                    </p>
+                    <p style="color: #F5E6D3; font-size: 0.85em; margin-top: 10px; opacity: 0.8;">
+                        Have a music event to add? <a href="https://projectsunapee.org/sunapee-harbor-event-submission-form/" target="_blank" style="color: #D4AF37; text-decoration: underline;">Submit it to Project Sunapee</a>
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -995,6 +1143,10 @@
                         <td>Culinary excellence and event catering — bringing the best local food to every gathering</td>
                     </tr>
                     <tr>
+                        <td><strong>Project Sunapee</strong></td>
+                        <td>Community calendar coordination, event promotion, and connecting the broader Sunapee community</td>
+                    </tr>
+                    <tr>
                         <td><strong>Prospect Hill Antiques</strong></td>
                         <td>Community partner supporting local culture and historic preservation</td>
                     </tr>
@@ -1080,6 +1232,170 @@
     </footer>
 
     <script>
+        // ==============================================
+        // COMMUNITY EVENTS INTEGRATION
+        // ==============================================
+        
+        // Sample events data - in production, this would be fetched from Project Sunapee's calendar API
+        // You would replace this with actual API calls to their Time.ly calendar system
+        const sampleEvents = [
+            {
+                title: "Sunapee CoffeeHouse",
+                date: "2025-11-15T19:00:00",
+                endDate: "2025-11-15T21:00:00",
+                venue: "Sunapee Methodist Church",
+                description: "Family-friendly listening room environment featuring live acoustic music. Admission is free with donations for performers.",
+                link: "https://projectsunapee.org/event/sunapee-coffeehouse/",
+                category: ["music", "coffeehouse"],
+                source: "Project Sunapee"
+            },
+            {
+                title: "Open Mic & Karaoke Night",
+                date: "2025-11-08T18:00:00",
+                endDate: "2025-11-08T21:00:00",
+                venue: "Hoptimystic's Tasting Room, Sunapee Harbor",
+                description: "Weekly open mic and karaoke night. Bring your voice, your instrument, or just your energy! Sign up in advance or walk-in slots available.",
+                link: "#signup",
+                category: ["music", "harbor"],
+                source: "Sunapee Sound Project"
+            },
+            {
+                title: "Spring Into Summer Concert Series",
+                date: "2025-05-30T17:30:00",
+                endDate: "2025-05-30T20:30:00",
+                venue: "Sunapee Harbor",
+                description: "Kick off the summer season with live music at the harbor! Family-friendly outdoor concert featuring local artists.",
+                link: "https://projectsunapee.org/event/spring-into-summer/",
+                category: ["music", "concert", "harbor"],
+                source: "Project Sunapee"
+            },
+            {
+                title: "Open Mic & Karaoke Night",
+                date: "2025-11-15T18:00:00",
+                endDate: "2025-11-15T21:00:00",
+                venue: "Hoptimystic's Tasting Room, Sunapee Harbor",
+                description: "Weekly open mic and karaoke night. Every Friday at Hoptimystic's! 15-minute performance slots available.",
+                link: "#signup",
+                category: ["music", "harbor"],
+                source: "Sunapee Sound Project"
+            },
+            {
+                title: "Open Mic & Karaoke Night",
+                date: "2025-11-22T18:00:00",
+                endDate: "2025-11-22T21:00:00",
+                venue: "Hoptimystic's Tasting Room, Sunapee Harbor",
+                description: "Weekly open mic and karaoke night. Every Friday! Join us for another great night of music.",
+                link: "#signup",
+                category: ["music", "harbor"],
+                source: "Sunapee Sound Project"
+            },
+            {
+                title: "Sunapee CoffeeHouse",
+                date: "2025-12-20T19:00:00",
+                endDate: "2025-12-20T21:00:00",
+                venue: "Sunapee Methodist Church",
+                description: "Monthly acoustic music series in an intimate setting. Featuring local and regional artists.",
+                link: "https://projectsunapee.org/event/sunapee-coffeehouse/",
+                category: ["music", "coffeehouse"],
+                source: "Project Sunapee"
+            }
+        ];
+
+        // Format date for display
+        function formatEventDate(dateString) {
+            const date = new Date(dateString);
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        // Format time range
+        function formatTimeRange(startDate, endDate) {
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
+            return `${start.toLocaleTimeString('en-US', timeOptions)} - ${end.toLocaleTimeString('en-US', timeOptions)}`;
+        }
+
+        // Check if event is upcoming
+        function isUpcoming(dateString) {
+            const eventDate = new Date(dateString);
+            const now = new Date();
+            return eventDate >= now;
+        }
+
+        // Render events
+        function renderEvents(filter = 'all') {
+            const container = document.getElementById('events-container');
+            const upcomingEvents = sampleEvents
+                .filter(event => isUpcoming(event.date))
+                .filter(event => filter === 'all' || event.category.includes(filter))
+                .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            if (upcomingEvents.length === 0) {
+                container.innerHTML = `
+                    <div class="no-events">
+                        <h3 style="color: #6B1C23; margin-bottom: 15px;">📅 No upcoming events in this category</h3>
+                        <p>Check back soon or try a different filter!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = upcomingEvents.map(event => `
+                <div class="event-card">
+                    <div class="event-date">${formatEventDate(event.date)}</div>
+                    <div class="event-title">${event.title}</div>
+                    <div class="event-venue">📍 ${event.venue}</div>
+                    <div style="color: #999; font-size: 0.9em; margin-bottom: 15px;">🕐 ${formatTimeRange(event.date, event.endDate)}</div>
+                    <div class="event-description">${event.description}</div>
+                    <a href="${event.link}" class="event-link" ${event.link.startsWith('http') ? 'target="_blank"' : ''}>
+                        ${event.link.startsWith('http') ? 'View Details →' : 'Sign Up to Perform →'}
+                    </a>
+                    <div class="event-source">via ${event.source}</div>
+                </div>
+            `).join('');
+        }
+
+        // Setup event filters
+        function setupEventFilters() {
+            const filterTags = document.querySelectorAll('.filter-tag');
+            filterTags.forEach(tag => {
+                tag.addEventListener('click', () => {
+                    // Remove active class from all tags
+                    filterTags.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tag
+                    tag.classList.add('active');
+                    // Render filtered events
+                    const filter = tag.getAttribute('data-filter');
+                    renderEvents(filter);
+                });
+            });
+        }
+
+        // Initialize events display
+        function initializeEventsDisplay() {
+            // Simulate loading
+            setTimeout(() => {
+                renderEvents('all');
+                setupEventFilters();
+            }, 500);
+        }
+
+        // Call when page loads
+        initializeEventsDisplay();
+
+        // ==============================================
+        // EXISTING JAVASCRIPT (unchanged)
+        // ==============================================
+        
         // Mobile menu toggle
         function toggleMenu() {
             const menu = document.getElementById('nav-menu');
