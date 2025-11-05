@@ -580,44 +580,47 @@
     a.button,
     input[type="submit"],
     input[type="button"] {
-      background-color: #d4a853;
-      color: #fff;
+      background: linear-gradient(135deg, #D4AF37, #E5C158);
+      color: #1a1a1a;
       border: none;
       border-radius: 8px;
-      padding: 10px 18px;
+      padding: 12px 24px;
       font-size: 1rem;
       font-family: 'Georgia', serif;
+      font-weight: bold;
       cursor: pointer;
       text-decoration: none;
       display: inline-block;
-      transition: background-color 0.2s ease, transform 0.1s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
     }
 
     button:hover,
     a.button:hover,
     input[type="submit"]:hover,
     input[type="button"]:hover {
-      background-color: #b48c41;
-      transform: translateY(-1px);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
     }
 
     button:active,
     a.button:active,
     input[type="submit"]:active,
     input[type="button"]:active {
-      background-color: #937032;
-      transform: translateY(1px);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(212, 175, 55, 0.4);
     }
 
     a.button {
-      color: #fff !important;
+      color: #1a1a1a !important;
     }
 
     a {
-      color: #d4a853;
+      color: #D4AF37;
       text-decoration: none;
     }
     a:hover {
+      color: #E5C158;
       text-decoration: underline;
     }
 
@@ -699,7 +702,7 @@
             <li><a href="#happening-now" style="background: rgba(212, 175, 55, 0.2); font-weight: bold;" onclick="closeMenu()">🎤 Happening Now</a></li>
             <li><a href="#regional-impact" onclick="closeMenu()">🌍 Regional Impact</a></li>
             <li><a href="#signup" style="background: rgba(212, 175, 55, 0.3); font-weight: bold;" onclick="closeMenu()">📝 Sign Up</a></li>
-            <li><a href="#about-video" onclick="closeMenu()">🎙️ Hear the Story</a></li>
+            <li><a href="#about-podcast" onclick="closeMenu()">🎙️ Hear the Story</a></li>
             <li><a href="#donate" style="background: rgba(212, 175, 55, 0.15);" onclick="closeMenu()">❤️ Donate</a></li>
             <li><a href="#phases" onclick="closeMenu()">Phases</a></li>
             <li><a href="#partners" onclick="closeMenu()">Partners</a></li>
@@ -1045,20 +1048,62 @@
             </div>
         </section>
 
-        <section id="about-video" style="background: linear-gradient(135deg, #1a1a1a, #2d2d2d); padding: 60px 20px; margin: 60px -20px 0; color: #F5E6D3;">
+        <section id="about-podcast" style="background: linear-gradient(135deg, #1a1a1a, #2d2d2d); padding: 60px 20px; margin: 60px -20px 0; color: #F5E6D3;">
             <h2 style="color: #D4AF37;">🎙️ Hear the Story</h2>
             <div style="max-width: 900px; margin: 0 auto;">
                 <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px;">Listen to this AI-generated podcast about the Sunapee Sound Project movement - created using our website content</p>
-                
-                <div id="video-container" style="background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
-                    <!-- Replace this comment with your NotebookLM embed code -->
-                    <div style="padding: 100px 40px; text-align: center; color: #666;">
-                        <p style="font-size: 1.2em;">📹 Video embed will appear here</p>
-                        <p style="margin-top: 10px; font-size: 0.9em;">Paste your NotebookLM video embed code in the HTML</p>
+
+                <div id="audio-container" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(107, 28, 35, 0.1)); padding: 40px; border-radius: 15px; border: 2px solid #D4AF37; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+                    <!-- Audio Player -->
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 1.3em; color: #D4AF37; margin-bottom: 15px; font-weight: bold;">
+                            🎵 Uniting a Town, Launching a Year-Round Community
+                        </div>
+                        <audio controls style="width: 100%; max-width: 700px; border-radius: 10px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));">
+                            <source src="assets/Sunapee_Sound_Project__Uniting_a_Town,_Launching_a_Year-Round_C.m4a" type="audio/mp4">
+                            <source src="assets/sunapee-sound-podcast.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                            <a href="assets/Sunapee_Sound_Project__Uniting_a_Town,_Launching_a_Year-Round_C.m4a" download style="color: #D4AF37;">Download the podcast here</a>
+                        </audio>
+                    </div>
+
+                    <!-- Podcast Description -->
+                    <div style="background: rgba(0,0,0,0.3); padding: 25px; border-radius: 10px; margin-top: 20px;">
+                        <p style="font-size: 1em; line-height: 1.7; color: #F5E6D3; margin-bottom: 15px;">
+                            This AI-generated podcast dives deep into the vision, challenges, and community spirit behind the Sunapee Sound Project.
+                            Hear about our mission to transform Sunapee Harbor into a year-round cultural destination, bringing together local businesses,
+                            artists, and community members in a collaborative movement.
+                        </p>
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 20px; font-size: 0.95em;">
+                            <div style="color: #D4AF37;">
+                                <strong>🎯 Topics Covered:</strong>
+                            </div>
+                            <div style="color: #F5E6D3;">
+                                Mission & Vision
+                            </div>
+                            <div style="color: #F5E6D3;">
+                                Community Impact
+                            </div>
+                            <div style="color: #F5E6D3;">
+                                Future Plans
+                            </div>
+                            <div style="color: #F5E6D3;">
+                                How to Get Involved
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <p style="text-align: center; margin-top: 20px; font-style: italic; color: #D4AF37;">Powered by Google NotebookLM</p>
+
+                <p style="text-align: center; margin-top: 20px; font-style: italic; color: #D4AF37;">
+                    🤖 Powered by Google NotebookLM - AI-generated content based on our project materials
+                </p>
+
+                <!-- Download Button -->
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="assets/Sunapee_Sound_Project__Uniting_a_Town,_Launching_a_Year-Round_C.m4a" download class="cta-button" style="display: inline-block; background: linear-gradient(135deg, #D4AF37, #E5C158); color: #1a1a1a; padding: 15px 40px; text-decoration: none; border-radius: 8px; font-weight: bold; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);">
+                        📥 Download Podcast
+                    </a>
+                </div>
             </div>
         </section>
 
