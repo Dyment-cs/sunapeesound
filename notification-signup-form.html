@@ -614,14 +614,12 @@
             };
             
             try {
-                // REPLACE THIS URL WITH YOUR ACTUAL ENDPOINT
-                // Options:
-                // 1. Your own backend API
-                // 2. Firebase Cloud Function
-                // 3. Zapier webhook
-                // 4. Google Apps Script
-                
-                const response = await fetch('YOUR_SIGNUP_ENDPOINT_URL', {
+                // Send to backend API
+                const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                    ? 'http://localhost:3000/api'
+                    : 'https://api.sunapeesound.com/api';  // Update with your production URL
+
+                const response = await fetch(`${API_URL}/notifications/signup`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
