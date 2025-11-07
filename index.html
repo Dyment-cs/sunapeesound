@@ -681,6 +681,316 @@
         white-space: nowrap;
       }
     }
+
+    /* ==============================================
+       LOGIN & ADMIN STYLES
+       ============================================== */
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 10000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+        backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+        background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+        margin: 5% auto;
+        padding: 40px;
+        border: 2px solid #D4AF37;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+        color: #F5E6D3;
+    }
+
+    .close {
+        color: #D4AF37;
+        float: right;
+        font-size: 35px;
+        font-weight: bold;
+        cursor: pointer;
+        line-height: 20px;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #E5C158;
+    }
+
+    .modal-content h2 {
+        color: #D4AF37;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    .modal-content input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 2px solid #D4AF37;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.1);
+        color: #F5E6D3;
+        font-size: 1em;
+    }
+
+    .modal-content input::placeholder {
+        color: rgba(245,230,211,0.5);
+    }
+
+    .modal-content button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        background: #D4AF37;
+        color: #1a1a1a;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .modal-content button:hover {
+        background: #E5C158;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(212,175,55,0.4);
+    }
+
+    .admin-dashboard {
+        display: none;
+        background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+        padding: 40px;
+        margin: 40px auto;
+        max-width: 1200px;
+        border-radius: 15px;
+        border: 2px solid #D4AF37;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+
+    .admin-dashboard h2 {
+        color: #D4AF37;
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 2.5em;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .admin-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+    }
+
+    .admin-tab {
+        padding: 12px 24px;
+        background: rgba(212,175,55,0.2);
+        color: #F5E6D3;
+        border: 2px solid #D4AF37;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: bold;
+    }
+
+    .admin-tab.active {
+        background: #D4AF37;
+        color: #1a1a1a;
+    }
+
+    .admin-tab:hover {
+        background: #E5C158;
+        color: #1a1a1a;
+        transform: translateY(-2px);
+    }
+
+    .admin-panel {
+        display: none;
+        background: rgba(255,255,255,0.05);
+        padding: 30px;
+        border-radius: 10px;
+        border: 1px solid rgba(212,175,55,0.3);
+    }
+
+    .admin-panel.active {
+        display: block;
+    }
+
+    .admin-panel h3 {
+        color: #D4AF37;
+        margin-bottom: 20px;
+        font-size: 1.8em;
+    }
+
+    .admin-panel input,
+    .admin-panel textarea {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 2px solid #D4AF37;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.1);
+        color: #F5E6D3;
+        font-size: 1em;
+        font-family: inherit;
+    }
+
+    .admin-panel textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .admin-panel button {
+        padding: 12px 30px;
+        margin: 10px 5px;
+        background: #D4AF37;
+        color: #1a1a1a;
+        border: none;
+        border-radius: 8px;
+        font-size: 1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .admin-panel button:hover {
+        background: #E5C158;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(212,175,55,0.4);
+    }
+
+    .admin-panel button.delete-btn {
+        background: #6B1C23;
+        color: #F5E6D3;
+    }
+
+    .admin-panel button.delete-btn:hover {
+        background: #8B2C33;
+    }
+
+    .content-item {
+        background: rgba(255,255,255,0.1);
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 8px;
+        border: 1px solid rgba(212,175,55,0.3);
+    }
+
+    .content-item h4 {
+        color: #D4AF37;
+        margin-bottom: 10px;
+    }
+
+    .content-item p {
+        color: #F5E6D3;
+        margin: 5px 0;
+    }
+
+    .video-gallery,
+    .flyer-gallery {
+        background: rgba(255,255,255,0.95);
+        padding: 40px;
+        margin: 40px auto;
+        max-width: 1200px;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .video-gallery h2,
+    .flyer-gallery h2 {
+        color: #6B1C23;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2.2em;
+    }
+
+    .video-grid,
+    .flyer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .video-item,
+    .flyer-item {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .video-item:hover,
+    .flyer-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    .video-item iframe {
+        width: 100%;
+        height: 200px;
+        border: none;
+    }
+
+    .video-item .video-info,
+    .flyer-item .flyer-info {
+        padding: 15px;
+        color: #333;
+    }
+
+    .video-item h4,
+    .flyer-item h4 {
+        color: #6B1C23;
+        margin-bottom: 8px;
+    }
+
+    .flyer-item img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .logout-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        background: #6B1C23;
+        color: #F5E6D3;
+        border: 2px solid #D4AF37;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 9999;
+        transition: all 0.3s ease;
+    }
+
+    .logout-btn:hover {
+        background: #8B2C33;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        .admin-dashboard {
+            padding: 20px;
+            margin: 20px 10px;
+        }
+
+        .video-grid,
+        .flyer-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
 </head>
 <body>
@@ -705,6 +1015,7 @@
             <li><a href="#partners" onclick="closeMenu()">Partners</a></li>
      <li><a href="notification-signup-form.html" onclick="closeMenu()">🔔 Notifications</a></li>
         <li><a href="#vision" onclick="closeMenu()">Vision</a></li>
+            <li><a href="#" onclick="openLoginModal(); closeMenu(); return false;" id="login-nav-btn">🔐 Login</a></li>
         </ul>
     </nav>
 
@@ -1331,6 +1642,88 @@
         </section>
     </div>
 
+    <!-- ==============================================
+         LOGIN MODAL
+         ============================================== -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <input type="text" id="loginUsername" placeholder="Username" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p style="margin-top: 20px; text-align: center; color: rgba(245,230,211,0.7); font-size: 0.9em;">
+                Default admin credentials: admin / admin123
+            </p>
+        </div>
+    </div>
+
+    <!-- ==============================================
+         ADMIN DASHBOARD
+         ============================================== -->
+    <div id="adminDashboard" class="admin-dashboard">
+        <button class="logout-btn" onclick="handleLogout()">Logout</button>
+        <h2>Admin Dashboard</h2>
+
+        <div class="admin-tabs">
+            <div class="admin-tab active" onclick="switchAdminTab('videos')">Manage Videos</div>
+            <div class="admin-tab" onclick="switchAdminTab('flyers')">Manage Flyers</div>
+        </div>
+
+        <!-- Videos Panel -->
+        <div id="videos-panel" class="admin-panel active">
+            <h3>Add YouTube Video</h3>
+            <form id="addVideoForm" onsubmit="addVideo(event)">
+                <input type="text" id="videoTitle" placeholder="Video Title" required>
+                <input type="text" id="videoUrl" placeholder="YouTube Video URL or Video ID" required>
+                <textarea id="videoDescription" placeholder="Description (optional)"></textarea>
+                <button type="submit">Add Video</button>
+            </form>
+
+            <h3 style="margin-top: 40px;">Existing Videos</h3>
+            <div id="existingVideos"></div>
+        </div>
+
+        <!-- Flyers Panel -->
+        <div id="flyers-panel" class="admin-panel">
+            <h3>Add Event Flyer</h3>
+            <form id="addFlyerForm" onsubmit="addFlyer(event)">
+                <input type="text" id="flyerTitle" placeholder="Event Title" required>
+                <input type="file" id="flyerImage" accept="image/*" required onchange="previewFlyer(event)">
+                <div id="flyerPreview" style="margin: 15px 0;"></div>
+                <textarea id="flyerDescription" placeholder="Event Description (optional)"></textarea>
+                <button type="submit">Add Flyer</button>
+            </form>
+
+            <h3 style="margin-top: 40px;">Existing Flyers</h3>
+            <div id="existingFlyers"></div>
+        </div>
+    </div>
+
+    <!-- ==============================================
+         VIDEO GALLERY (Public Display)
+         ============================================== -->
+    <div class="video-gallery" id="videoGallery" style="display: none;">
+        <h2>Band Videos & Performances</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">
+            Check out local bands and performances from around Sunapee Harbor
+        </p>
+        <div class="video-grid" id="publicVideos"></div>
+    </div>
+
+    <!-- ==============================================
+         FLYER GALLERY (Public Display)
+         ============================================== -->
+    <div class="flyer-gallery" id="flyerGallery" style="display: none;">
+        <h2>Upcoming Events</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">
+            See what's happening in the Sunapee music scene
+        </p>
+        <div class="flyer-grid" id="publicFlyers"></div>
+    </div>
+
     <footer>
         <h3>Let's Build This Together</h3>
         <p>Join the coordinated effort to unite Sunapee Harbor's creative community</p>
@@ -1877,6 +2270,334 @@
 
         // Rotate donors every 4 seconds
         setInterval(rotateDonor, 4000);
+
+        // ==============================================
+        // LOGIN & ADMIN SYSTEM
+        // ==============================================
+
+        // Simple authentication - In production, use proper backend authentication
+        const ADMIN_CREDENTIALS = {
+            'admin': 'admin123',
+            'user': 'user123'
+        };
+
+        // Storage keys
+        const STORAGE_KEYS = {
+            loggedIn: 'sunapeesound_loggedIn',
+            username: 'sunapeesound_username',
+            isAdmin: 'sunapeesound_isAdmin',
+            videos: 'sunapeesound_videos',
+            flyers: 'sunapeesound_flyers'
+        };
+
+        // Initialize data structures
+        let videos = JSON.parse(localStorage.getItem(STORAGE_KEYS.videos) || '[]');
+        let flyers = JSON.parse(localStorage.getItem(STORAGE_KEYS.flyers) || '[]');
+
+        // Check if user is logged in on page load
+        window.addEventListener('load', () => {
+            checkLoginStatus();
+            renderPublicContent();
+        });
+
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem(STORAGE_KEYS.loggedIn) === 'true';
+            const username = localStorage.getItem(STORAGE_KEYS.username);
+            const isAdmin = localStorage.getItem(STORAGE_KEYS.isAdmin) === 'true';
+
+            if (isLoggedIn && username) {
+                showAdminInterface(isAdmin);
+            }
+        }
+
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('loginModal');
+            if (event.target === modal) {
+                closeLoginModal();
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (ADMIN_CREDENTIALS[username] && ADMIN_CREDENTIALS[username] === password) {
+                const isAdmin = username === 'admin';
+
+                // Store login state
+                localStorage.setItem(STORAGE_KEYS.loggedIn, 'true');
+                localStorage.setItem(STORAGE_KEYS.username, username);
+                localStorage.setItem(STORAGE_KEYS.isAdmin, isAdmin.toString());
+
+                closeLoginModal();
+                showAdminInterface(isAdmin);
+
+                alert(`Welcome, ${username}!`);
+            } else {
+                alert('Invalid credentials. Try admin/admin123 or user/user123');
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem(STORAGE_KEYS.loggedIn);
+            localStorage.removeItem(STORAGE_KEYS.username);
+            localStorage.removeItem(STORAGE_KEYS.isAdmin);
+
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('login-nav-btn').textContent = '🔐 Login';
+            document.getElementById('login-nav-btn').onclick = function() { openLoginModal(); closeMenu(); return false; };
+
+            alert('Logged out successfully!');
+        }
+
+        function showAdminInterface(isAdmin) {
+            document.getElementById('adminDashboard').style.display = 'block';
+            document.getElementById('login-nav-btn').textContent = '👤 Dashboard';
+            document.getElementById('login-nav-btn').onclick = function() {
+                document.getElementById('adminDashboard').scrollIntoView({ behavior: 'smooth' });
+                closeMenu();
+                return false;
+            };
+
+            if (isAdmin) {
+                renderAdminVideos();
+                renderAdminFlyers();
+            }
+        }
+
+        function switchAdminTab(tab) {
+            // Update tabs
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update panels
+            document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById(`${tab}-panel`).classList.add('active');
+        }
+
+        // ==============================================
+        // VIDEO MANAGEMENT
+        // ==============================================
+
+        function extractYouTubeID(url) {
+            // Handle various YouTube URL formats
+            const patterns = [
+                /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/,
+                /youtube\.com\/embed\/([^&\s]+)/,
+                /^([a-zA-Z0-9_-]{11})$/  // Just the ID
+            ];
+
+            for (const pattern of patterns) {
+                const match = url.match(pattern);
+                if (match) return match[1];
+            }
+            return null;
+        }
+
+        function addVideo(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('videoTitle').value;
+            const url = document.getElementById('videoUrl').value;
+            const description = document.getElementById('videoDescription').value;
+
+            const videoId = extractYouTubeID(url);
+            if (!videoId) {
+                alert('Invalid YouTube URL or Video ID');
+                return;
+            }
+
+            const video = {
+                id: Date.now(),
+                title,
+                videoId,
+                description,
+                dateAdded: new Date().toISOString()
+            };
+
+            videos.unshift(video);
+            localStorage.setItem(STORAGE_KEYS.videos, JSON.stringify(videos));
+
+            document.getElementById('addVideoForm').reset();
+            renderAdminVideos();
+            renderPublicContent();
+
+            alert('Video added successfully!');
+        }
+
+        function deleteVideo(id) {
+            if (confirm('Are you sure you want to delete this video?')) {
+                videos = videos.filter(v => v.id !== id);
+                localStorage.setItem(STORAGE_KEYS.videos, JSON.stringify(videos));
+                renderAdminVideos();
+                renderPublicContent();
+            }
+        }
+
+        function renderAdminVideos() {
+            const container = document.getElementById('existingVideos');
+
+            if (videos.length === 0) {
+                container.innerHTML = '<p style="color: #F5E6D3; text-align: center; padding: 20px;">No videos added yet.</p>';
+                return;
+            }
+
+            container.innerHTML = videos.map(video => `
+                <div class="content-item">
+                    <h4>${video.title}</h4>
+                    <p><strong>Video ID:</strong> ${video.videoId}</p>
+                    ${video.description ? `<p><strong>Description:</strong> ${video.description}</p>` : ''}
+                    <p style="font-size: 0.9em; opacity: 0.7;">Added: ${new Date(video.dateAdded).toLocaleDateString()}</p>
+                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/${video.videoId}" frameborder="0" allowfullscreen style="margin: 10px 0; border-radius: 8px;"></iframe>
+                    <button class="delete-btn" onclick="deleteVideo(${video.id})">Delete Video</button>
+                </div>
+            `).join('');
+        }
+
+        // ==============================================
+        // FLYER MANAGEMENT
+        // ==============================================
+
+        function previewFlyer(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('flyerPreview');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `<img src="${e.target.result}" style="max-width: 300px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function addFlyer(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('flyerTitle').value;
+            const description = document.getElementById('flyerDescription').value;
+            const fileInput = document.getElementById('flyerImage');
+
+            if (fileInput.files.length === 0) {
+                alert('Please select an image');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const flyer = {
+                    id: Date.now(),
+                    title,
+                    description,
+                    imageData: e.target.result,
+                    dateAdded: new Date().toISOString()
+                };
+
+                flyers.unshift(flyer);
+                localStorage.setItem(STORAGE_KEYS.flyers, JSON.stringify(flyers));
+
+                document.getElementById('addFlyerForm').reset();
+                document.getElementById('flyerPreview').innerHTML = '';
+                renderAdminFlyers();
+                renderPublicContent();
+
+                alert('Flyer added successfully!');
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        function deleteFlyer(id) {
+            if (confirm('Are you sure you want to delete this flyer?')) {
+                flyers = flyers.filter(f => f.id !== id);
+                localStorage.setItem(STORAGE_KEYS.flyers, JSON.stringify(flyers));
+                renderAdminFlyers();
+                renderPublicContent();
+            }
+        }
+
+        function renderAdminFlyers() {
+            const container = document.getElementById('existingFlyers');
+
+            if (flyers.length === 0) {
+                container.innerHTML = '<p style="color: #F5E6D3; text-align: center; padding: 20px;">No flyers added yet.</p>';
+                return;
+            }
+
+            container.innerHTML = flyers.map(flyer => `
+                <div class="content-item">
+                    <h4>${flyer.title}</h4>
+                    ${flyer.description ? `<p><strong>Description:</strong> ${flyer.description}</p>` : ''}
+                    <p style="font-size: 0.9em; opacity: 0.7;">Added: ${new Date(flyer.dateAdded).toLocaleDateString()}</p>
+                    <img src="${flyer.imageData}" style="max-width: 100%; margin: 10px 0; border-radius: 8px;">
+                    <button class="delete-btn" onclick="deleteFlyer(${flyer.id})">Delete Flyer</button>
+                </div>
+            `).join('');
+        }
+
+        // ==============================================
+        // PUBLIC DISPLAY
+        // ==============================================
+
+        function renderPublicContent() {
+            renderPublicVideos();
+            renderPublicFlyers();
+        }
+
+        function renderPublicVideos() {
+            const gallery = document.getElementById('videoGallery');
+            const container = document.getElementById('publicVideos');
+
+            if (videos.length === 0) {
+                gallery.style.display = 'none';
+                return;
+            }
+
+            gallery.style.display = 'block';
+            container.innerHTML = videos.map(video => `
+                <div class="video-item">
+                    <iframe src="https://www.youtube.com/embed/${video.videoId}" allowfullscreen></iframe>
+                    <div class="video-info">
+                        <h4>${video.title}</h4>
+                        ${video.description ? `<p>${video.description}</p>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPublicFlyers() {
+            const gallery = document.getElementById('flyerGallery');
+            const container = document.getElementById('publicFlyers');
+
+            if (flyers.length === 0) {
+                gallery.style.display = 'none';
+                return;
+            }
+
+            gallery.style.display = 'block';
+            container.innerHTML = flyers.map(flyer => `
+                <div class="flyer-item">
+                    <img src="${flyer.imageData}" alt="${flyer.title}">
+                    <div class="flyer-info">
+                        <h4>${flyer.title}</h4>
+                        ${flyer.description ? `<p>${flyer.description}</p>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
     </script>
     <script>!function(window){const host="https://labs.heygen.com",url=host+"/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiJSaWthX0Nhc3VhbExvb2tfcHVibGljIiwi%0D%0AcHJldmlld0ltZyI6Imh0dHBzOi8vZmlsZXMyLmhleWdlbi5haS9hdmF0YXIvdjMvZWRmZTE1NWE1%0D%0AMTI5NDA4OGJjZjk3YTU1ZDhiNDZkNzBfNTU5MjAvcHJldmlld190YXJnZXQud2VicCIsIm5lZWRS%0D%0AZW1vdmVCYWNrZ3JvdW5kIjpmYWxzZSwia25vd2xlZGdlQmFzZUlkIjoiM2JhNjZhYmQwMGNiNGMx%0D%0ANWE2MGUxMWM5ODY2ZjM2YWIiLCJ1c2VybmFtZSI6IjNlNmM3N2MzNjRjNDQ5MmE5YzY1OWI4OTg4%0D%0AMDcyMjgwIn0%3D&inIFrame=1",clientWidth=document.body.clientWidth,wrapDiv=document.createElement("div");wrapDiv.id="heygen-streaming-embed";const container=document.createElement("div");container.id="heygen-streaming-container";const stylesheet=document.createElement("style");stylesheet.innerHTML=`\n  #heygen-streaming-embed {\n    z-index: 9999;\n    position: fixed;\n    left: 40px;\n    bottom: 40px;\n    width: 200px;\n    height: 200px;\n    border-radius: 50%;\n    border: 2px solid #fff;\n    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.12);\n    transition: all linear 0.1s;\n    overflow: hidden;\n\n    opacity: 0;\n    visibility: hidden;\n  }\n  #heygen-streaming-embed.show {\n    opacity: 1;\n    visibility: visible;\n  }\n  #heygen-streaming-embed.expand {\n    ${clientWidth<540?"height: 266px; width: 96%; left: 50%; transform: translateX(-50%);":"height: 366px; width: calc(366px * 16 / 9);"}\n    border: 0;\n    border-radius: 8px;\n  }\n  #heygen-streaming-container {\n    width: 100%;\n    height: 100%;\n  }\n  #heygen-streaming-container iframe {\n    width: 100%;\n    height: 100%;\n    border: 0;\n  }\n  `;const iframe=document.createElement("iframe");iframe.allowFullscreen=!1,iframe.title="Streaming Embed",iframe.role="dialog",iframe.allow="microphone",iframe.src=url;let visible=!1,initial=!1;window.addEventListener("message",(e=>{e.origin===host&&e.data&&e.data.type&&"streaming-embed"===e.data.type&&("init"===e.data.action?(initial=!0,wrapDiv.classList.toggle("show",initial)):"show"===e.data.action?(visible=!0,wrapDiv.classList.toggle("expand",visible)):"hide"===e.data.action&&(visible=!1,wrapDiv.classList.toggle("expand",visible)))})),container.appendChild(iframe),wrapDiv.appendChild(stylesheet),wrapDiv.appendChild(container),document.body.appendChild(wrapDiv)}(globalThis);</script>
 </body>
