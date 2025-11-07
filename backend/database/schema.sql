@@ -83,9 +83,41 @@ CREATE TABLE IF NOT EXISTS sms_log (
     sent_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Users Table (for authentication)
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    email TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    role TEXT DEFAULT 'user',
+    active BOOLEAN DEFAULT 1,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- YouTube Videos Table
+CREATE TABLE IF NOT EXISTS youtube_videos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    youtube_url TEXT NOT NULL,
+    video_id TEXT NOT NULL,
+    description TEXT,
+    category TEXT DEFAULT 'general',
+    display_order INTEGER DEFAULT 0,
+    active BOOLEAN DEFAULT 1,
+    created_by INTEGER,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (created_by) REFERENCES users(id)
+);
+
 -- Create indexes for performance
 CREATE INDEX IF NOT EXISTS idx_notification_email ON notification_signups(email);
 CREATE INDEX IF NOT EXISTS idx_newsletter_email ON newsletter_signups(email);
 CREATE INDEX IF NOT EXISTS idx_openmic_date ON openmic_signups(signup_date);
 CREATE INDEX IF NOT EXISTS idx_events_date ON events(date);
 CREATE INDEX IF NOT EXISTS idx_notification_active ON notification_signups(active);
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
+CREATE INDEX IF NOT EXISTS idx_youtube_videos_active ON youtube_videos(active);
+CREATE INDEX IF NOT EXISTS idx_youtube_videos_order ON youtube_videos(display_order);

@@ -49,12 +49,16 @@ const notificationsRouter = require('./routes/notifications');
 const openmicRouter = require('./routes/openmic');
 const newsletterRouter = require('./routes/newsletter');
 const eventsRouter = require('./routes/events');
+const authRouter = require('./routes/auth');
+const videosRouter = require('./routes/videos');
 
 // API Routes
 app.use('/api/notifications', notificationsRouter);
 app.use('/api/openmic', openmicRouter);
 app.use('/api/newsletter', newsletterRouter);
 app.use('/api/events', eventsRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/videos', videosRouter);
 
 // Apply signup rate limiting
 app.post('/api/notifications/signup', signupLimiter);
@@ -89,6 +93,18 @@ app.get('/', (req, res) => {
                 create: 'POST /api/events',
                 update: 'PUT /api/events/:id',
                 delete: 'DELETE /api/events/:id'
+            },
+            auth: {
+                register: 'POST /api/auth/register',
+                login: 'POST /api/auth/login',
+                verify: 'GET /api/auth/verify'
+            },
+            videos: {
+                list: 'GET /api/videos',
+                get: 'GET /api/videos/:id',
+                create: 'POST /api/videos (requires auth)',
+                update: 'PUT /api/videos/:id (requires auth)',
+                delete: 'DELETE /api/videos/:id (requires auth)'
             }
         },
         docs: 'https://github.com/yourusername/sunapee-sound-backend'
@@ -138,6 +154,8 @@ const server = app.listen(PORT, () => {
 ║   - http://localhost:${PORT}/api/openmic         ║
 ║   - http://localhost:${PORT}/api/newsletter      ║
 ║   - http://localhost:${PORT}/api/events          ║
+║   - http://localhost:${PORT}/api/auth            ║
+║   - http://localhost:${PORT}/api/videos          ║
 ║                                               ║
 ╚═══════════════════════════════════════════════╝
     `);
